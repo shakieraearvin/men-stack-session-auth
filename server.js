@@ -9,6 +9,8 @@ const morgan = require("morgan");
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
+const authController = require("./controllers/auth.js");
+
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -22,6 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
+
+app.use("/auth", authController);
 
 
 // GET /
